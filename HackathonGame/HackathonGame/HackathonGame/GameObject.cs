@@ -27,7 +27,7 @@ namespace HackathonGame
 
         public virtual void Draw(SpriteBatch spr)
         {
-            spr.Draw(texture, position, Color.White);
+            spr.Draw(texture, new Rectangle(this.position.X, this.position.Y, this.size.X, this.size.Y), null, Color.White);
         }
     }
 }

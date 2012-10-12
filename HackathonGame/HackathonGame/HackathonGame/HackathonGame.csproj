@@ -72,11 +72,14 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObject.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Room.cs" />
+    <Compile Include="TextureBin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

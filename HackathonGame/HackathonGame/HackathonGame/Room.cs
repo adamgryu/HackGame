@@ -26,7 +26,7 @@ namespace HackathonGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
+            player.Draw(spriteBatch);
         }
     }
 }

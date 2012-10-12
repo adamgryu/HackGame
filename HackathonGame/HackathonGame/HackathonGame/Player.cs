@@ -15,7 +15,7 @@ namespace HackathonGame
         Keys Right;
 
         public Player(Vector2 position, Room room) :
-            base(position, Vector2.Zero, TextureBin.Get("player"))
+            base(position, Vector2.Zero, TextureBin.Get("pixel"))
         {
             Up = Keys.Up;
             Down = Keys.Down;

@@ -20,12 +20,12 @@ namespace HackathonGame
             this.texture = texture;
         }
 
-        public void Update()
+        public virtual void Update()
         {
 
         }
 
-        public void Draw(SpriteBatch spr)
+        public virtual void Draw(SpriteBatch spr)
         {
             spr.Draw(texture, position, Color.White);
         }

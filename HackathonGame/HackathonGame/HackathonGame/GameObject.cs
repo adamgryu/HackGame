@@ -25,6 +25,11 @@ namespace HackathonGame
 
         }
 
+        protected virtual void Move()
+        {
+
+        }
+
         public virtual void Draw(SpriteBatch spr)
         {
             spr.Draw(texture, new Rectangle(this.position.X, this.position.Y, this.size.X, this.size.Y), null, Color.White);

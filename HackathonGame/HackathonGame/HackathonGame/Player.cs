@@ -25,9 +25,14 @@ namespace HackathonGame
 
         public override void Update()
         {
-
+            Move();
 
             base.Update();
+        }
+
+        protected override void Move()
+        {
+            base.Move();
         }
     }
 }

@@ -16,8 +16,13 @@ namespace HackathonGame
         {
             foreach (String name in names)
             {
-
+                texDic[name] = cm.Load<Texture2D>(name);
             }
+        }
+
+        public static Texture2D Get(String name)
+        {
+            return texDic[name];
         }
     }
 }

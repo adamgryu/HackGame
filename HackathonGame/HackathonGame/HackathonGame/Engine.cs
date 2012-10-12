@@ -18,10 +18,15 @@ namespace HackathonGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Room room;
+
+        Vector2 screenResolution;
 
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            screenResolution = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Content.RootDirectory = "Content";
         }
 
@@ -33,6 +38,7 @@ namespace HackathonGame
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            room = new Room(new 
         }
 
         protected override void Update(GameTime gameTime)

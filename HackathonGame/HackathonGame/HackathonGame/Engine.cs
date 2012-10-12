@@ -20,19 +20,20 @@ namespace HackathonGame
         SpriteBatch spriteBatch;
         Room room;
 
-        Vector2 screenResolution;
+        public static Vector2 screenResolution;
 
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
-
             screenResolution = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             base.Initialize();
+            
         }
 
         protected override void LoadContent()
@@ -43,11 +44,8 @@ namespace HackathonGame
 
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }

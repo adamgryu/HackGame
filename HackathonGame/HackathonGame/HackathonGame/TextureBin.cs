@@ -16,7 +16,7 @@ namespace HackathonGame
         {
             foreach (String name in names)
             {
-                texDic[name] = cm.Load<Texture2D>(name);
+                texDic.Add(name, cm.Load<Texture2D>(name));
             }
         }
 

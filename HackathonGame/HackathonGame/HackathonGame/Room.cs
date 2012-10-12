@@ -16,7 +16,7 @@ namespace HackathonGame
         public Room(Vector2 Size)
         {
             this.Size = Size;
-            this.player = new Player(Vector2.Zero);
+            this.player = new Player(Vector2.Zero, this);
         }
 
         public void Update()

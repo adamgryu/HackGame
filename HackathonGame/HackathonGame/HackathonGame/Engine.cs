@@ -41,6 +41,7 @@ namespace HackathonGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             room = new Room(screenResolution);
+            TextureBin.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)

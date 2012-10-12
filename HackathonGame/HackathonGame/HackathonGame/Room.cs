@@ -11,7 +11,7 @@ namespace HackathonGame
     {
         public Vector2 Size;
         Player player;
-        List<GameObject> blocks;
+        public List<GameObject> blocks;
 
         public Room(Vector2 Size)
         {

@@ -13,23 +13,32 @@ namespace HackathonGame
         Vector2 velocity;
         Vector2 size;
         Texture2D texture;
+        Room room;
 
-        public GameObject(Vector2 position, Vector2 velocity, Vector2 size, Texture2D texture)
+        public float Left { get { return position.X; } }
+        public float Right { get { return (position.X + size.X); } }
+        public float Top { get { return position.Y; } }
+        public float Bottom { get { return (position.Y + size.Y); } }
+
+        public GameObject(Vector2 position, Vector2 velocity, Vector2 size, Texture2D texture, Room room)
         {
             this.position = position;
             this.velocity = velocity;
             this.texture = texture;
             this.size = size;
+            this.room = room;
         }
 
         public virtual void Update()
         {
-
+            
         }
 
         protected virtual void Move()
         {
-
+            foreach (GameObject block in room.blocks)
+            {
+            }
         }
 
         public virtual void Draw(SpriteBatch spr)

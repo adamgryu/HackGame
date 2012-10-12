@@ -58,7 +58,9 @@ namespace HackathonGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullCounterClockwise);
             room.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

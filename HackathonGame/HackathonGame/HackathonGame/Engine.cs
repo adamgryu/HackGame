@@ -20,32 +20,35 @@ namespace HackathonGame
         SpriteBatch spriteBatch;
         Room room;
 
-        public static Vector2 screenResolution;
+        public Vector2 screenResolution = new Vector2(1024, 768);
 
         public Engine()
         {
             graphics = new GraphicsDeviceManager(this);
-            screenResolution = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            
+            this.IsMouseVisible = true;
+            this.graphics.PreferredBackBufferWidth = (int)screenResolution.X;
+            this.graphics.PreferredBackBufferHeight = (int)screenResolution.Y;
+            this.graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            room = new Room(new 
+            room = new Room(screenResolution);
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            room.Update();
 
             base.Update(gameTime);
         }
@@ -54,7 +57,7 @@ namespace HackathonGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            room.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

@@ -14,7 +14,7 @@ namespace HackathonGame
         private static KeyboardState keyboard;
         private static KeyboardState keyboardPrev;
 
-        public void Update()
+        public static void Update()
         {
             mousePrev = mouse;
             keyboardPrev = keyboard;
@@ -27,22 +27,22 @@ namespace HackathonGame
             return (keyboardPrev.IsKeyDown(key) && keyboard.IsKeyUp(key));
         }
 
-        public bool IsKeyDown(Keys key)
+        public static bool IsKeyDown(Keys key)
         {
             return keyboard.IsKeyDown(key);
         }
 
-        public bool MouseLeftButtonTapped
+        public static bool MouseLeftButtonTapped
         {
             get { return (mouse.LeftButton == ButtonState.Pressed && mousePrev.LeftButton == ButtonState.Released); }
         }
 
-        public bool MouseRightButtonTapped
+        public static bool MouseRightButtonTapped
         {
             get { return (mouse.RightButton == ButtonState.Pressed && mousePrev.RightButton == ButtonState.Released); }
         }
 
-        public Vector2 MousePosition
+        public static Vector2 MousePosition
         {
             get { return new Vector2(mouse.X, mouse.Y); }
         }

@@ -40,8 +40,8 @@ namespace HackathonGame
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            room = new Room(screenResolution);
             TextureBin.LoadContent(Content);
+            room = new Room(screenResolution);
         }
 
         protected override void Update(GameTime gameTime)

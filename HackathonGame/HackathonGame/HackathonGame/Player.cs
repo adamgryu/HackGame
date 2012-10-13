@@ -13,7 +13,7 @@ namespace HackathonGame
         int MAX_X_SPEED = 10;
         int MAX_Y_SPEED = 20;
         float ACCELERATION = 1.4f;
-        float FRICTION = 0.2f;
+        float FRICTION = 0.9f;
         float WALL_SLOWDOWN = 0.25f;
         const float HOLD_SPEED = 1.5f;
         private int JUMP_LET_GO_SPEED = -20;
@@ -34,6 +34,7 @@ namespace HackathonGame
         bool lastWallLeft = false;
 
         AnimationSet aniSet;
+        bool canHitBlock = false;
 
         public Player(Room room, Vector2 position) :
             base(room, position, Vector2.Zero, new Vector2(48, 48), TextureBin.Get("dude2_f1"))
@@ -48,6 +49,15 @@ namespace HackathonGame
         public override void Update()
         {
             aniSet.Update();
+
+            if (this.Top > room.camera.Y + Engine.screenResolution.Y || this.Right < 0 || this.Left > Engine.screenResolution.X)
+                this.Health = 0;
+
+            if (this.Left < 0 && velocity.X < -1)
+                velocity.X = -1;
+            if (this.Right > Engine.screenResolution.X && velocity.X > 1)
+                velocity.X = 1;
+                
 
             // Movement
             if (Input.IsKeyDown(KeyLeft))
@@ -72,12 +82,15 @@ namespace HackathonGame
             Move();
             if (this.OnGround)
             {
+                canHitBlock = true;
+                this.aniSet.current = aniSet.fStand;
                 this.velocity.Y += STICKY;
                 if (Input.IsKeyDown(KeyUp))
                 {
                     this.velocity.Y = -11;
                     this.OnGround = false;
                     this.OnGroundPrev = false;
+                    SoundBin.Play("jump");
                 }
                 this.velocity.X = MathExtra.ApplyFriction(this.velocity.X, FRICTION);
             }
@@ -92,6 +105,11 @@ namespace HackathonGame
 
             if (this.hitWallLeft || this.hitWallRight)
             {
+                canHitBlock = true;
+                if (Input.IsKeyDown(KeyUp))
+                    SoundBin.Play("jump");
+
+
                 if (this.hitWallRight)
                 {
                     this.lastWallLeft = false;
@@ -139,6 +157,20 @@ namespace HackathonGame
             base.Update();
 
             OnGroundPrev = OnGround;
+        }
+
+        protected override void HitCeiling(GameObject topHit)
+        {
+            if (topHit is Block)
+            {
+                if (canHitBlock)
+                {
+                    if (--((Block)topHit).life < 0)
+                        room.blocks.BufferRemove(topHit);
+                    canHitBlock = false;
+                }
+            }
+            base.HitCeiling(topHit);
         }
 
         protected override void HitGround()

@@ -42,7 +42,10 @@ namespace HackathonGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureBin.LoadContent(Content);
+            SoundBin.LoadSounds(Content);
             room = new Room(screenResolution);
+            MediaPlayer.Play(SoundBin.GetSong("descent"));
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void Update(GameTime gameTime)

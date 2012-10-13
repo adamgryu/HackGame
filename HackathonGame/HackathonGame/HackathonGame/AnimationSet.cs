@@ -13,6 +13,7 @@ namespace HackathonGame
 
         public Animation forward;
         public Animation backward;
+        public Animation fStand;
         public Animation forwardPick;
         public Animation backwardPick;
 
@@ -28,6 +29,7 @@ namespace HackathonGame
             this.backward = new Animation(TextureBin.Get("pback"), 1, 8, 2);
             this.forwardPick = new Animation(TextureBin.Get("pfrontgrab"), 1, 8, 2);
             this.backwardPick = new Animation(TextureBin.Get("pbackgrab"), 1, 8, 2);
+            this.fStand = new Animation(TextureBin.Get("pfrontstand"), 1, 8, 2);
 
             this.current = this.forward;
         }

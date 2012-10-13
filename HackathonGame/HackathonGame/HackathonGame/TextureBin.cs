@@ -11,6 +11,8 @@ namespace HackathonGame
     {
         static Dictionary<String, Texture2D> texDic = new Dictionary<string, Texture2D>();
         static List<String> names = new List<String> { "pixel", "bkg_back", "bkg_front" , "dude2_f1" , "pfront", "pback", "pfrontgrab", "pbackgrab" , "pfrontstand" };
+        public static SpriteFont mainFont;
+        public static SpriteFont smallFont;
 
         public static void LoadContent(ContentManager cm)
         {
@@ -18,6 +20,8 @@ namespace HackathonGame
             {
                 texDic.Add(name, cm.Load<Texture2D>(name));
             }
+            mainFont = cm.Load<SpriteFont>("mainFont");
+            smallFont = cm.Load<SpriteFont>("smallFont");
         }
 
         public static Texture2D Pixel

@@ -34,13 +34,23 @@ namespace HackathonGame
             this.room = room;
         }
 
+        public GameObject(Room room, Vector2 v1, Vector2 v2)
+        {
+            this.position = v1;
+            this.size = v2 - v1;
+            this.room = room;
+            this.texture = TextureBin.Get("pixel");
+            this.velocity = Vector2.Zero;
+        }
+
+
         public virtual void Update()
         {
 
         }
 
         public virtual Vector2 Move()
-        {           
+        {
             return MoveX() + MoveY();
         }
 
@@ -50,6 +60,7 @@ namespace HackathonGame
 
             float maxY = room.Size.Y;
             float minY = float.NegativeInfinity;
+            GameObject topHit = null;
             foreach (GameObject other in room.blocks)
             {
                 if (this == other)
@@ -59,7 +70,10 @@ namespace HackathonGame
                     if (other.Top > this.Center.Y && other.Top < maxY)
                         maxY = other.Top;
                     if (other.Bottom < this.Center.Y && other.Bottom > minY)
+                    {
                         minY = other.Bottom;
+                        topHit = other;
+                    }
                 }
             }
             this.position.Y += this.velocity.Y;
@@ -68,6 +82,7 @@ namespace HackathonGame
             {
                 this.Top = minY;
                 this.velocity.Y = 0;
+                HitCeiling(topHit);
             }
             if (this.Bottom > maxY)
             {
@@ -77,6 +92,11 @@ namespace HackathonGame
             }
 
             return this.position - prevPos;
+        }
+
+        protected virtual void HitCeiling(GameObject topHit)
+        {
+            // Nothing.
         }
 
         public Vector2 MoveX()

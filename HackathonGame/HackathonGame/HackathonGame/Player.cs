@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HackathonGame
 {
@@ -32,6 +33,8 @@ namespace HackathonGame
         int wallTimer = 0;
         bool lastWallLeft = false;
 
+        AnimationSet aniSet;
+
         public Player(Room room, Vector2 position) :
             base(room, position, Vector2.Zero, new Vector2(48, 48), TextureBin.Get("dude2_f1"))
         {
@@ -39,16 +42,24 @@ namespace HackathonGame
             KeyDown = Keys.Down;
             KeyLeft = Keys.Left;
             KeyRight = Keys.Right;
+            aniSet = new AnimationSet(this);
         }
 
         public override void Update()
         {
+            aniSet.Update();
 
             // Movement
             if (Input.IsKeyDown(KeyLeft))
+            {
                 this.velocity.X -= ACCELERATION;
+                aniSet.current = aniSet.backward;
+            }
             else if (Input.IsKeyDown(KeyRight))
+            {
                 this.velocity.X += ACCELERATION;
+                aniSet.current = aniSet.forward;
+            }
 
             // Limit the velocity.
             this.velocity.X = MathHelper.Clamp(this.velocity.X, -MAX_X_SPEED, MAX_X_SPEED);
@@ -84,10 +95,12 @@ namespace HackathonGame
                 if (this.hitWallRight)
                 {
                     this.lastWallLeft = false;
+                    aniSet.current = aniSet.forwardPick;
                 }
                 if (this.hitWallLeft)
                 {
                     this.lastWallLeft = true;
+                    aniSet.current = aniSet.backwardPick;
                 }
                 wallTimer = 10;
             }
@@ -137,6 +150,12 @@ namespace HackathonGame
         public override Vector2 Move()
         {
             return base.Move();
+        }
+
+        public override void Draw(SpriteBatch spr)
+        {
+            this.texture = aniSet.GetTexture();
+            base.Draw(spr);
         }
     }
 }

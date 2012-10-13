@@ -9,12 +9,12 @@ namespace HackathonGame
 {
     public class AnimationSet
     {
-        Animation current;
+        public Animation current;
 
-        Animation forward;
-        Animation backward;
-        Animation forwardPick;
-        Animation backwardPick;
+        public Animation forward;
+        public Animation backward;
+        public Animation forwardPick;
+        public Animation backwardPick;
 
         Player player;
 
@@ -24,12 +24,10 @@ namespace HackathonGame
         public AnimationSet(Player player)
         {
             this.player = player;
-           // this.forward = new AnimationSet(TextureBin.Get("Right"), 5, 16, 2);
-            //this.forward = new AnimationSet(TextureBin.Get("Left"), 5, 16, 2);
-            //this.backward = new AnimationSet(TextureBin.GetTexture("Back"), 4, 16, 2);
-            //this.up = new AnimationSet(TextureBin.GetTexture("Up"), 5, 16, 2);
-            //this.down = new AnimationSet(TextureBin.GetTexture("Down"), 5, 16, 2);
-            //this.launch = new AnimationSet(TextureBin.GetTexture("Launch"), 4, 16, 4);
+            this.forward = new Animation(TextureBin.Get("pfront"), 1, 8, 2);
+            this.backward = new Animation(TextureBin.Get("pback"), 1, 8, 2);
+            this.forwardPick = new Animation(TextureBin.Get("pfrontgrab"), 1, 8, 2);
+            this.backwardPick = new Animation(TextureBin.Get("pbackgrab"), 1, 8, 2);
 
             this.current = this.forward;
         }

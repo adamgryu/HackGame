@@ -13,7 +13,7 @@ namespace HackathonGame
         public Vector2 position;
         public Vector2 velocity;
         public Vector2 size;
-        Texture2D texture;
+        public Texture2D texture;
         protected Room room;
 
         public float Left { get { return position.X; } set { this.position.X = value; } }

@@ -65,9 +65,19 @@ namespace HackathonGame
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullCounterClockwise);
             room.Draw(spriteBatch);
+
+            if (title > 0)
+            {
+                title--;
+                Vector2 size = TextureBin.mainFont.MeasureString("volcano Ice\n  Mountian");
+                float alpha = MathHelper.SmoothStep(0f, 1f, title / 200f);
+                spriteBatch.DrawString(TextureBin.mainFont, "volcano ice\n  Mountian", Engine.screenResolution / 2 - size / 2, Color.Red * alpha);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        float title = 200;
     }
 }

@@ -48,11 +48,12 @@ namespace HackathonGame
             this.Size = Size;
             this.player = new Player(this, new Vector2(WALL_PADDING, Size.Y / 2));
             this.blocks = new BufferedList<GameObject>();
-            this.blocks.Add(new Block(this, Vector2.Zero, new Vector2(WALL_PADDING, Size.Y)));
-            this.blocks.Add(new Block(this, new Vector2(Size.X - WALL_PADDING, 0), new Vector2(WALL_PADDING, Size.Y)));
+            this.blocks.Add(new GameObject(this, Vector2.Zero, Vector2.Zero, new Vector2(WALL_PADDING, Size.Y), TextureBin.Pixel));
+            this.blocks.Add(new GameObject(this, new Vector2(Size.X - WALL_PADDING, 0), Vector2.Zero, new Vector2(WALL_PADDING, Size.Y), TextureBin.Pixel));
             this.blocks.Add(player);
             this.blockGroups = new List<BlockGroup>();
             this.snow = new BufferedList<Snow>();
+            this.blocks.Add(new GameObject(this, new Vector2(0, Engine.screenResolution.Y - 200), new Vector2(Engine.screenResolution.X, Engine.screenResolution.Y)));
         }
 
         public void Update()
@@ -101,7 +102,11 @@ namespace HackathonGame
                 //}
 
                 foreach (GameObject b in blocks)
+                {
                     b.Update();
+                    if (b.Top > camera.Y + Engine.screenResolution.Y && !(b is Player))
+                        blocks.BufferRemove(b);
+                }
                 blocks.ApplyBuffers();
             }
             else if (Input.IsKeyboardTapped(Keys.Enter))

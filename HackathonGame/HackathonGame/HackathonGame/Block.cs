@@ -24,8 +24,6 @@ namespace HackathonGame
         public override void Update()
         {
             velocity.Y += 0.01f;
-            if (this.Top > room.camera.Y + Engine.screenResolution.Y)
-                room.blocks.BufferRemove(this);
 
             if (this.velocity.Y > 6)
                 this.velocity.Y = 6;

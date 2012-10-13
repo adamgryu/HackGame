@@ -29,6 +29,7 @@ namespace HackathonGame
         Boolean OnGround = false;
         bool OnGroundPrev = false;
         public int Health = 1;
+        bool lastLookRight = false;
 
         int wallTimer = 0;
         bool lastWallLeft = false;
@@ -64,11 +65,13 @@ namespace HackathonGame
             {
                 this.velocity.X -= ACCELERATION;
                 aniSet.current = aniSet.backward;
+                lastLookRight = false;
             }
             else if (Input.IsKeyDown(KeyRight))
             {
                 this.velocity.X += ACCELERATION;
                 aniSet.current = aniSet.forward;
+                lastLookRight = true;
             }
 
             // Limit the velocity.
@@ -83,7 +86,10 @@ namespace HackathonGame
             if (this.OnGround)
             {
                 canHitBlock = true;
-                this.aniSet.current = aniSet.fStand;
+                if (lastLookRight)
+                    this.aniSet.current = aniSet.fStand;
+                else
+                    this.aniSet.current = aniSet.bStand;
                 this.velocity.Y += STICKY;
                 if (Input.IsKeyDown(KeyUp))
                 {

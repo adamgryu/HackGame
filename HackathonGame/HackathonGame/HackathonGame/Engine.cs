@@ -18,9 +18,10 @@ namespace HackathonGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Room room;
+        public static Room room;
+        public static int gameScore = 0;
 
-        public Vector2 screenResolution = new Vector2(1024, 768);
+        public static Vector2 screenResolution = new Vector2(480, 720);
 
         public Engine()
         {
@@ -46,7 +47,8 @@ namespace HackathonGame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            Input.Update();
+            if (Input.IsKeyboardTapped(Keys.Escape))
                 this.Exit();
 
             room.Update();
@@ -56,7 +58,7 @@ namespace HackathonGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(28, 18, 67));
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullCounterClockwise);
             room.Draw(spriteBatch);

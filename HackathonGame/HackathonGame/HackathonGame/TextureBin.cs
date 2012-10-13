@@ -10,7 +10,7 @@ namespace HackathonGame
     public static class TextureBin
     {
         static Dictionary<String, Texture2D> texDic = new Dictionary<string, Texture2D>();
-        static List<String> names = new List<String> { "pixel" };
+        static List<String> names = new List<String> { "pixel", "bkg_back", "bkg_front" , "dude2_f1" };
 
         public static void LoadContent(ContentManager cm)
         {
@@ -18,6 +18,11 @@ namespace HackathonGame
             {
                 texDic.Add(name, cm.Load<Texture2D>(name));
             }
+        }
+
+        public static Texture2D Pixel
+        {
+            get { return texDic["pixel"];  }
         }
 
         public static Texture2D Get(String name)
